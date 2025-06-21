@@ -1,37 +1,30 @@
 function createTable() {
-  // Prompt for rows and columns
-  const rows = prompt("Input number of rows");
-  const cols = prompt("Input number of columns");
-
-  // Convert to integers
-  const rn = parseInt(rows);
-  const cn = parseInt(cols);
-
-  // Validate inputs
-  if (isNaN(rn) || isNaN(cn)) {
-    alert("Please enter valid numeric values.");
-    return;
-  }
-
-  if (rn <= 0 || cn <= 0) {
-    alert("Rows and columns must be greater than 0.");
-    return;
-  }
-
   // Get the table element
   const table = document.getElementById("myTable");
 
   // Clear any existing table content
   table.innerHTML = "";
 
-  // Create the table rows and columns
+  // Prompt user for rows and columns
+  const rn = parseInt(prompt("Input number of rows"));
+  const cn = parseInt(prompt("Input number of columns"));
+
+  // Validate input: numeric, positive, non-zero
+  if (isNaN(rn) || isNaN(cn) || rn <= 0 || cn <= 0) {
+    alert("Please enter valid positive numbers for rows and columns.");
+    return;
+  }
+
+  // Create rows and columns
   for (let i = 0; i < rn; i++) {
-    const row = table.insertRow();
+    const row = document.createElement("tr");
 
     for (let j = 0; j < cn; j++) {
-      const cell = row.insertCell();
+      const cell = document.createElement("td");
       cell.textContent = `Row-${i} Column-${j}`;
+      row.appendChild(cell);
     }
+
+    table.appendChild(row);
   }
 }
-
